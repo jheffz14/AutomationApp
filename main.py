@@ -1,21 +1,9 @@
-import subprocess
-import time
-import pyautogui
 
-print("1. Python started")
+from engine.workflow_engine import WorkflowEngine
 
+def main():
+    engine = WorkflowEngine()
+    engine.run()
 
-
-print("2. PyAutoGUI imported")
-
-subprocess.Popen("notepad.exe")
-
-print("3. Notepad opened")
-
-time.sleep(2)
-
-print("4. Typing...")
-
-pyautogui.write("Hello World!")
-
-print("5. Done")
+if __name__ == "__main__":
+    main()
