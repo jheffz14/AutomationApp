@@ -1,12 +1,14 @@
 import subprocess
 import pyautogui
 import time
+from workflow.workflow_repository import WorkflowRepository
 
 class WorkflowEngine:
    
     def run(self):
-         print("Workflow Engine is running...") 
-         workflow = self.load_workflow()      
+         print("Workflow Engine is running...")     
+         repository = WorkflowRepository()
+         workflow = repository.load_workflow()    
          self.execute_workflow(workflow)
              
     def execute_workflow(self,workflow): 
@@ -23,12 +25,4 @@ class WorkflowEngine:
                 pyautogui.press(step["key"])
         
     
-    def load_workflow(self):
-              workflow = [
-                        {"action": "open", "program": "notepad.exe"},
-                        {"action": "wait", "seconds": 2},
-                        {"action": "type", "text": "Hello Jefferson!"},
-                        {"action": "press", "key": "enter"},
-                        {"action": "type", "text": "Welcome to Automation Studio."}
-                    ]
-              return workflow
+    
