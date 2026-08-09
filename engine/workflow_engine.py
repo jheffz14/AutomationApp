@@ -18,5 +18,10 @@ class WorkflowEngine:
         print("Loading workflows...")
 
         for step in workflow:
-            action = self.registry.get_action(step["action"])
+         try:
+            action = self.registry.get_action(step["action"])      
             action.execute(step)
+         except ValueError as error:
+             print(f"Error: {error}")
+             return
+            
