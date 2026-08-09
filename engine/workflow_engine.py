@@ -1,7 +1,6 @@
-import subprocess
-import pyautogui
-import time
 from workflow.workflow_repository import WorkflowRepository
+from registry.action_registry import ActionRegistry
+
 
 class WorkflowEngine:
    
@@ -9,20 +8,17 @@ class WorkflowEngine:
          print("Workflow Engine is running...")     
          repository = WorkflowRepository()
          workflow = repository.load_workflow()    
-         self.execute_workflow(workflow)
+         
+         registry = ActionRegistry()
+         
+         self.execute_workflow(registry,workflow)
              
-    def execute_workflow(self,workflow): 
+    def execute_workflow(self,registry,workflow):
         print ("Loading workflows...")
       
         for step in workflow:
-            if step["action"] == "open":
-                subprocess.Popen(step["program"])
-            elif step["action"] == "wait":
-                time.sleep(step["seconds"])
-            elif step["action"] == "type":
-                pyautogui.write(step["text"], interval=0.05)
-            elif step["action"] == "press":
-                pyautogui.press(step["key"])
-        
-    
-    
+            
+            action = registry.get_action(step["action"])
+            action.execute(step)
+      
+          
