@@ -1,24 +1,22 @@
 from workflow.workflow_repository import WorkflowRepository
-from registry.action_registry import ActionRegistry
 
 
 class WorkflowEngine:
-   
+
+    def __init__(self, registry):
+        self.registry = registry
+
     def run(self):
-         print("Workflow Engine is running...")     
-         repository = WorkflowRepository()
-         workflow = repository.load_workflow()    
-         
-         registry = ActionRegistry()
-         
-         self.execute_workflow(registry,workflow)
-             
-    def execute_workflow(self,registry,workflow):
-        print ("Loading workflows...")
-      
+        print("Workflow Engine is running...")
+
+        repository = WorkflowRepository()
+        workflow = repository.load_workflow()
+
+        self.execute_workflow(workflow)
+
+    def execute_workflow(self, workflow):
+        print("Loading workflows...")
+
         for step in workflow:
-            
-            action = registry.get_action(step["action"])
+            action = self.registry.get_action(step["action"])
             action.execute(step)
-      
-          
