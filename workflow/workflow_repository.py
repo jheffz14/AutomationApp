@@ -1,15 +1,17 @@
 
+import json
+import os
+
 
 class WorkflowRepository:
     
+    
+    def __init__(self):
+        self.workflow_file = os.path.join(os.path.dirname(__file__),"workflow.json")
+    
     def load_workflow(self):
    
-        
-        workflow = [
-                {"action": "open", "program": "notepad.exe"},
-                {"action": "wait", "seconds": 2},
-                {"action": "type", "text": "Hello Jefferson!"},
-                {"action": "press", "key": "enter"},
-                {"action": "type", "text": "Welcome to Automation Studio."}
-                    ]
-        return workflow
+        with open(self.workflow_file,"r", encoding="utf-8") as file:
+            workflow = json.load(file)
+        return workflow 
+       
