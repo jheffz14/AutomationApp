@@ -1,18 +1,19 @@
-from action.open_program_action import OpenProgramAction
-from action.wait_action import WaitAction
-from action.type_action import TypeAction
-from action.press_action import PressAction
 from registry.action_registry import ActionRegistry
+from config.actions import ACTIONS
 
 
 class AppContainer:
     
     def __init__(self):
-         self.actions = {
-                    "open": OpenProgramAction(),
-                    "wait": WaitAction(),
-                    "type": TypeAction(),
-                    "press": PressAction()
-                }
+         self.actions = self.get_actions()
          self.registry = ActionRegistry(self.actions)
    
+    def get_actions(self):
+        
+        actions = {}
+        
+        for action_name, action_class in ACTIONS.items():
+
+         actions[action_name] = action_class()
+
+        return actions    
