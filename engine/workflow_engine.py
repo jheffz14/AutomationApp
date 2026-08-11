@@ -1,28 +1,28 @@
 from workflow.workflow_repository import WorkflowRepository
 
-
 class WorkflowEngine:
 
-    def __init__(self, registry):
+    def __init__(self, registry,logger):
         self.registry = registry
+        self.logger = logger
 
     def run(self):
 
-        print("Workflow Engine is running...")
+        self.logger.info("Workflow engine is running")
 
         repository = WorkflowRepository()
 
         workflow = repository.load_workflow()
 
         if workflow is None:
-            print("Workflow could not be loaded.")
+            self.logger.info("Workflow could not be loaded")
             return
 
         self.execute_workflow(repository, workflow)
 
     def execute_workflow(self, repository, workflow):
 
-        print("Loading workflows...")
+        self.logger.info("Loading Workflow...")
 
         for step in workflow:
 
@@ -42,5 +42,5 @@ class WorkflowEngine:
 
             except ValueError as error:
 
-                print(f"Error: {error}")
+                self.logger.error(f"Error: {error}")
                 return
