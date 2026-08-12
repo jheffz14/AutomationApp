@@ -24,7 +24,7 @@ class WorkflowEngine:
 
         self.logger.info("Loading Workflow...")
 
-        for step in workflow:
+        for index, step in enumerate (workflow,start=1):
 
             try:
 
@@ -33,12 +33,16 @@ class WorkflowEngine:
                     self.registry
                 ):
                     return
-
+                
+                self.logger.info(f"Step {index}: {step['action']}")
+                
                 action = self.registry.get_action(
                     step["action"]
                 )
-
+                      
                 action.execute(step)
+                
+                self.logger.info(f"Step {index} completed")
 
             except ValueError as error:
 
