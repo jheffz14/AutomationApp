@@ -4,18 +4,23 @@ from config.actions import ACTIONS
 
 
 class AppContainer:
-    
+
     def __init__(self):
-         self.actions = self.get_actions()
-         self.registry = ActionRegistry(self.actions)
-         self.logger = WorkflowLogger()
-   
+
+        self.logger = WorkflowLogger()
+
+        self.actions = self.get_actions()
+
+        self.registry = ActionRegistry(self.actions)
+
     def get_actions(self):
-        
+
         actions = {}
-        
+
         for action_name, action_class in ACTIONS.items():
 
-         actions[action_name] = action_class()
+            actions[action_name] = action_class(
+                self.logger
+            )
 
-        return actions    
+        return actions

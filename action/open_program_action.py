@@ -4,5 +4,12 @@ class OpenProgramAction:
     
     required_fields = ["program"]
     
+    def __init__(self, logger):
+        self.logger = logger
+    
     def execute(self,step):
-        subprocess.Popen(step["program"])
+        program = step["program"]
+        
+        self.logger.info(f"Opening program: {program}")
+        
+        subprocess.Popen(program)
