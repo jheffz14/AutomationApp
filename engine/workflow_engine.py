@@ -49,3 +49,8 @@ class WorkflowEngine:
 
                 self.logger.error(f"Error: {error}")
                 return
+            
+            except Exception as error:
+                
+                self.logger.error(f"Step {index} failed: {error}")
+                return 
