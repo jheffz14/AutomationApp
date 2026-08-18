@@ -1,5 +1,6 @@
 from registry.action_registry import ActionRegistry
 from logger.workflow_logger import WorkflowLogger
+from workflow.workflow_repository import WorkflowRepository
 from config.actions import ACTIONS
 
 
@@ -12,6 +13,8 @@ class AppContainer:
         self.actions = self.get_actions()
 
         self.registry = ActionRegistry(self.actions)
+        
+        self.repository = WorkflowRepository()
 
     def get_actions(self):
 
