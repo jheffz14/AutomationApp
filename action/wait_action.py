@@ -11,5 +11,7 @@ class WaitAction:
     def execute(self, step):
 
         seconds = step.get("seconds", 2)
+        
+        self.logger.info(f"Waiting {seconds} seconds")
 
         time.sleep(seconds)
