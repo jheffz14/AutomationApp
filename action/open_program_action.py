@@ -1,11 +1,9 @@
 import subprocess
+from action.base_action import BaseAction
 
-class OpenProgramAction:
+class OpenProgramAction(BaseAction):
     
     required_fields = ["program"]
-    
-    def __init__(self, logger):
-        self.logger = logger
     
     def execute(self,step):
         program = step["program"]

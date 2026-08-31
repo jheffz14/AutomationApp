@@ -1,14 +1,10 @@
-
-
 import pyautogui
+from action.base_action import BaseAction
 
 
-class PressAction:
+class PressAction(BaseAction):
     
     required_fields = ["key"]
-    
-    def __init__(self, logger):
-        self.logger = logger
     
     def execute(self, step):
         key = step.get("key", "")

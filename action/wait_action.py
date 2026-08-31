@@ -1,12 +1,12 @@
 import time
+from action.base_action import BaseAction
 
 
-class WaitAction:
+
+class WaitAction(BaseAction):
 
     required_fields = ["seconds"]
 
-    def __init__(self, logger):
-        self.logger = logger
 
     def execute(self, step):
 

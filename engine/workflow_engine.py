@@ -25,10 +25,7 @@ class WorkflowEngine:
 
             try:
 
-                if not self.repository.validate_step(
-                    step,
-                    self.registry
-                ):
+                if not self.validate_step(step):
                     return
 
                 self.logger.info(
@@ -54,3 +51,19 @@ class WorkflowEngine:
                 
                 self.logger.error(f"Step {index} failed: {error}")
                 return 
+            
+            
+    def validate_step(self, step):
+     
+             action = self.registry.get_action(step["action"])
+     
+             for field in action.required_fields:
+     
+                 if field not in step:
+                     print(
+                         f"Error: action '{step['action']}' "
+                         f"is missing required field '{field}'."
+                     )
+                     return False
+     
+             return True       

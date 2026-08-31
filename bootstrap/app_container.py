@@ -14,7 +14,7 @@ class AppContainer:
 
         self.registry = ActionRegistry(self.actions)
         
-        self.repository = WorkflowRepository()
+        self.repository = WorkflowRepository(self.logger)
 
     def get_actions(self):
 
